@@ -82,17 +82,7 @@ android:versionName="1.0" >
 
 ***Hints:***
 
-*1.Where "COM_CODE" companycode, Credencial Key ("XXXXX") and Credencial Secret ("X") provide by the Merchant*
 
-  
-
-*2.Where Production_Server set "NO" while you Test and For Production Set as "YES"*
-
-  
-
-  
-
-  
 
 ##### How to get Company Code & AccessToken
 
