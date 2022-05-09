@@ -206,7 +206,7 @@ List<CouponSerialResults> results;
 
   
 
-##### Click here for [Full Implementation Guide](https://github.com/mezzofy/mzcoupon-android-customer-lib)
+##### Click here for [Full Implementation Guide](https://github.com/mezzofy/mzcoupon-android-customer-lib-v2)
 
   
 
