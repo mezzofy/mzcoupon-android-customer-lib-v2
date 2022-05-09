@@ -84,7 +84,7 @@ android:versionName="1.0" >
 
 
 
-##### How to get Company Code & AccessToken
+##### How to get Merchant Code & AccessToken
 
 Login to Merchant Account
 
