@@ -105,8 +105,8 @@ Login to Merchant Account
 ```java
 
 LoginRequest loginRequest=new LoginRequest();  
-loginRequest.setUserName("HDCK5RHB7FFJWTWW");  
-loginRequest.setPassWord("9Q70");  
+loginRequest.setUserName("A3GUJSOHTY164RIQ");
+loginRequest.setPassWord("EXNN");  
   
 Call<LoginResponse> loginResponseCall= mzApiClient.getLoginService(loginRequest).userLogin();  
 loginResponseCall.enqueue(new Callback<LoginResponse>() {  
