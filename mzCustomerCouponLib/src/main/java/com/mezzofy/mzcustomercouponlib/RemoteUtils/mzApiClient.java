@@ -26,14 +26,16 @@ public class mzApiClient {
 
         Retrofit retrofit=new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("https://auth.mzapi.mezzofy.com/")
+                .baseUrl("https://auth.mzapiqc.mezzofy.com/")
                 .client(okHttpClient)
                 .build();
 
         return retrofit;
     }
 
-    private static Retrofit getBearerRetrofit(String token){
+
+
+    private static Retrofit getBearerRetrofit(String token,String url){
         HttpLoggingInterceptor httpLoggingInterceptor=new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -49,12 +51,13 @@ public class mzApiClient {
 
         Retrofit retrofit=new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("https://serial.mzapi.mezzofy.com/")
+                .baseUrl(url)
                 .client(client)
                 .build();
 
         return retrofit;
     }
+
 
 
     public static class BasicAuthInterceptor implements Interceptor {
@@ -89,8 +92,24 @@ public class mzApiClient {
     }
 
     public static SerialServices getSerialServices(String token){
-        SerialServices serialServices=getBearerRetrofit(token).create(SerialServices.class);
+        SerialServices serialServices=getBearerRetrofit(token,"https://serial.mzapiqc.mezzofy.com/").create(SerialServices.class);
         return serialServices;
+    }
+
+    public static CustomerService getCustomerServices(String token){
+        CustomerService customerService=getBearerRetrofit(token,"https://customer.mzapiqc.mezzofy.com/").create(CustomerService.class);
+        return customerService;
+    }
+
+
+    public static MerchantService getMerchantServices(String token){
+        MerchantService merchantService=getBearerRetrofit(token,"https://merchant.mzapiqc.mezzofy.com/").create(MerchantService.class);
+        return merchantService;
+    }
+
+    public static OutletService getOutletService(String token){
+        OutletService outletService=getBearerRetrofit(token,"https://outlet.mzapiqc.mezzofy.com/").create(OutletService.class);
+        return outletService;
     }
 
 }

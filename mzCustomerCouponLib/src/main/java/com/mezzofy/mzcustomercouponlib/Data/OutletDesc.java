@@ -1,14 +1,16 @@
 package com.mezzofy.mzcustomercouponlib.Data;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class OutletDesc {
     private String th;
     private String kr;
     private String en;
     private String id;
-    //@JsonProperty("zh-Hant")
+    @JsonProperty("zh-Hant")
     private String zhHant;
     private String jp;
-  // @JsonProperty("zh-Hans")
+   @JsonProperty("zh-Hans")
     private String zhHans;
 
     public String getTh() {
