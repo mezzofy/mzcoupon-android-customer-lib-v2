@@ -92,23 +92,23 @@ public class mzApiClient {
     }
 
     public static SerialServices getSerialServices(String token){
-        SerialServices serialServices=getBearerRetrofit(token,"https://serial.mzapiqc.mezzofy.com/").create(SerialServices.class);
+        SerialServices serialServices=getBearerRetrofit(token,"https://serial.mzapi.mezzofy.com/").create(SerialServices.class);
         return serialServices;
     }
 
     public static CustomerService getCustomerServices(String token){
-        CustomerService customerService=getBearerRetrofit(token,"https://customer.mzapiqc.mezzofy.com/").create(CustomerService.class);
+        CustomerService customerService=getBearerRetrofit(token,"https://customer.mzapi.mezzofy.com/").create(CustomerService.class);
         return customerService;
     }
 
 
     public static MerchantService getMerchantServices(String token){
-        MerchantService merchantService=getBearerRetrofit(token,"https://merchant.mzapiqc.mezzofy.com/").create(MerchantService.class);
+        MerchantService merchantService=getBearerRetrofit(token,"https://merchant.mzapi.mezzofy.com/").create(MerchantService.class);
         return merchantService;
     }
 
     public static OutletService getOutletService(String token){
-        OutletService outletService=getBearerRetrofit(token,"https://outlet.mzapiqc.mezzofy.com/").create(OutletService.class);
+        OutletService outletService=getBearerRetrofit(token,"https://outlet.mzapi.mezzofy.com/").create(OutletService.class);
         return outletService;
     }
 

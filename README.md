@@ -203,6 +203,75 @@ List<CouponSerialResults> results;
 
 
 
+**Call Function For Get Customer Detail**
+
+ 
+
+``` java
+Call<CustomerData> customerDataCall= mzApiClient.getCustomerServices("Your Access Token").getCustomerDetailByCustomerId("CustomerId");  
+```
+
+**Return**
+CustomerData;
+
+
+**Call Function For Get Merchant Setting**
+
+ 
+
+``` java
+
+Call<MerchantSettingModel> merchantSettingModelCall= mzApiClient.getCustomerServices("Your Access Token").getMerchantSetting();
+  
+```
+
+**Return**
+MerchantSettingModel;
+
+**Call Function For Get Merchant Download Setting**
+``` java
+
+Call<MerchantDownloadSettings> merchantDownloadSettingsCall= mzApiClient.getMerchantServices("Your Access Token").getMerchantDownloadSetting();
+
+```
+
+**Return**
+MerchantDownloadSettingsData;
+
+
+**Call Function For Get Outlet By CouponCode**
+``` java
+
+Map<String, String> params = new HashMap<String, String>();  
+params.put("limit", "20");  
+params.put("skip", "0");  
+params.put("search_by", "Aravind");  
+params.put("coupon_code","\'1004634\'");  
+Call<OutletProfileModel> outletProfileModelCall= mzApiClient.getOutletService("Your Access Token").getOutletByCouponCode(params);
+
+```
+
+**Return**
+OutletProfileModel;
+
+
+**Call Function For Get Outlet By RedeemPass**
+``` java
+
+
+Map<String, String> params = new HashMap<String, String>();  
+params.put("outlet_redeem_pass", "2222");  
+  
+Call<OutletProfile> outletProfileModelCall= mzApiClient.getOutletService("Your Access Token").getOutletByRedeemPass(params);
+
+
+```
+
+**Return**
+OutletProfile;
+
+
+
 
   
 
