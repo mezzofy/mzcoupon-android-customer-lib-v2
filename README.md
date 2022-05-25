@@ -142,6 +142,7 @@ params.put("skip", "0");
 Call<CouponModel> couponListModelCall= mzApiClient.getCouponServices(" Your AccessToken ").getCouponList(params);
 
 ```
+
 **Return**
 Summary summary;  
 ArrayList<**CouponData**> results;
@@ -192,6 +193,41 @@ transationVoidModel.setTxn_serials(txnSerialList);
   
 Call<VoidIssueReponseData> loginResponseCall= mzApiClient.getTransactionService("Your AccessToken",transationVoidModel).postCouponVoid();
 ```
+Delivery Method
+Parameter values
+E -> via Email
+S -> via SMS
+I -> via Customer ID
+
+Coupon Delivery Type**
+Parameter values
+S -> Single Email
+W -> Wallet
+N -> None
+** This parameter value is used for Database storing purpose. Parameter value in the COMMIT API will be considered
+
+lang
+Supported language and code mentioned below
+
+ "en" > English
+ "zh-Hant" > Chinese Traditional
+ "zh-Hans" > Chinese Simplified
+ "kr" > Korean
+ "jp" > Japanese
+ "th" > Thai
+ "id" > Indonesia Bahasa 
+
+payment name
+This parameter value is used for Database storing purpose. Parameter value in the COMMIT API will be considered (e.g Stripe)
+
+Purchase receipt
+Parameter values
+Y -> Yes then billing template will be used (Client Specific)
+N -> No
+
+receipt_template_id
+- Used to generate receipt template** (e.g mezzofy - Mezzofy template) 
+- purchase_receipt should be "Y"
 
 **Return**
 transaction_id;  
