@@ -142,6 +142,8 @@ params.put("skip", "0");
 Call<CouponModel> couponListModelCall= mzApiClient.getCouponServices(" Your AccessToken ").getCouponList(params);
 
 ```
+limit -> returns a reduced stream of first N elements
+skip -> returns a stream of remaining elements after skipping first N elements
 
 **Return**
 Summary summary;  
