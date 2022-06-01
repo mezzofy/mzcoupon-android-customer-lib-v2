@@ -129,6 +129,251 @@ accessTokenExpiresAt;
 customerCouponAccessToken;  
 customerCouponAccessTokenExpiresAt;
 
+
+**Call Function For CUSTOMER -Register **
+
+```java
+
+Map<String, String> params = new HashMap<String, String>();  
+params.put("delivery_method", "S");  
+  
+CustomerRegisterModel customerModel=new CustomerRegisterModel();  
+  
+CustomerRegisterData customerData=new CustomerRegisterData();  
+customerData.setCustomer_email("test@test.com");  
+customerData.setCustomer_first_name("tester");  
+customerData.setCustomer_mobile("+91100000000");  
+customerData.setUser_type("C");  
+customerData.setCustomer_password("12345678");  
+customerData.setCountry_code("IN");  
+  
+customerModel.setCustomer(customerData);  
+  
+Call<CustomerRegisterModel> customerDataCall= mzApiClient.getCustomerRegisterService(" Your AccessToken ",customerModel).postCustomerRegister(params);
+
+```
+**Return**
+country_code;  
+customer_id;  
+customer_first_name;  
+customer_last_name;  
+customer_username;  
+customer_password;  
+customer_email;  
+customer_mobile;  
+customer_gender;  
+customer_address;  
+user_type;  
+customer_status;
+
+
+**Call Function For CUSTOMER -Login **
+
+```java
+
+Map<String, String> params = new HashMap<String, String>();  
+params.put("lang", "en");  
+  
+CustomerModel customerModel=new CustomerModel();  
+  
+CustomerData customerData=new CustomerData();  
+customerData.setCustomer_email("test@test.com");  
+customerData.setCustomer_password("12345678");  
+  
+customerModel.setCustomer(customerData);  
+  
+  
+Call<CustomerModel> customerDataCall= mzApiClient.getCustomerAuthService(" Your AccessToken ",customerModel).postCustomerLoginAuth(params);
+
+```
+**Return**
+country_code;  
+customer_id;  
+customer_first_name;  
+customer_last_name;  
+customer_username;  
+customer_password;  
+customer_email;  
+customer_mobile;  
+customer_gender;  
+customer_address;  
+user_type;  
+customer_status;
+
+
+**Call Function For CUSTOMER -Forgot Password **
+
+```java
+
+Map<String, String> params = new HashMap<String, String>();  
+params.put("encrypted", "y");  
+params.put("lang", "en");  
+  
+Call<CustomerData> customerDataCall= mzApiClient.getCustomerServices(" Your Access Token ").postCustomerForgotPassword("test@test.com",params);
+
+```
+**Return**
+country_code;  
+customer_id;  
+customer_first_name;  
+customer_last_name;  
+customer_username;  
+customer_password;  
+customer_email;  
+customer_mobile;  
+customer_gender;  
+customer_address;  
+user_type;  
+customer_status;
+otp_code;
+
+**Call Function For CUSTOMER -Change  Password **
+
+```java
+
+Map<String, String> params = new HashMap<String, String>();  
+params.put("lang", "en");  
+params.put("otp_code","526151");  
+  
+CustomerData customerData=new CustomerData();  
+customerData.setNew_password("12345678");  
+  
+Call<CustomerData> customerDataCall= mzApiClient.getCustomerUpdatePasswordService("Your Access Token",customerData).CustomerUpdatePassword("CustomerId",params);
+
+```
+**otp_code ---** you get forgot password response
+
+**Return**
+country_code;  
+customer_id;  
+customer_first_name;  
+customer_last_name;  
+customer_username;  
+customer_password;  
+customer_email;  
+customer_mobile;  
+customer_gender;  
+customer_address;  
+user_type;  
+customer_status;
+
+
+**Call Function For CUSTOMER -Update Customer Profile   **
+
+```java
+
+Map<String, String> params = new HashMap<String, String>();  
+params.put("lang", "en");  
+params.put("encrypted","y");  
+  
+CustomerModel customerModel=new CustomerModel();  
+  
+CustomerData customerData=new CustomerData();  
+customerData.setCustomer_email("test@test.com");  
+customerData.setCustomer_password("12345678");  
+customerData.setCustomer_first_name("test");  
+customerData.setCustomer_last_name("R");  
+customerData.setCustomer_gender("F");  
+customerData.setTemplate_id("MZ_CUSTOMER_UPDATE_PROFILE");  
+customerData.setCustomer_code("Mezzofy");  
+customerData.setReference_no("12345");  
+  
+customerModel.setCustomer(customerData);  
+  
+Call<CustomerModel> customerDataCall= mzApiClient.getCustomerUpdateService("Your Access Token",customerModel).CustomerProfileUpdate("CustomerId",params);
+
+```
+
+**Return**
+country_code;  
+customer_id;  
+customer_first_name;  
+customer_last_name;  
+customer_username;  
+customer_password;  
+customer_email;  
+customer_mobile;  
+customer_gender;  
+customer_address;  
+user_type;  
+customer_status;
+
+
+
+**Call Function For CUSTOMER-- Get Customer Detail**
+``` java
+Call<CustomerData> customerDataCall= mzApiClient.getCustomerServices("Your Access Token").getCustomerDetailByCustomerId("CustomerId");  
+```
+
+**Return**
+country_code;  
+customer_id;  
+customer_first_name;  
+customer_last_name;  
+customer_username;  
+customer_password;  
+customer_email;  
+customer_mobile;  
+customer_gender;  
+customer_address;  
+user_type;  
+customer_status;
+
+
+**Call Function For Get Merchant Setting**
+``` java
+Call<MerchantSettingModel> merchantSettingModelCall= mzApiClient.getCustomerServices("Your Access Token").getMerchantSetting();
+```
+
+**Return**
+cus_setting_id;  
+ block_list_email;  
+created_on;  
+merchant_id;  
+updated_on;  
+banner_url;  
+wallet_banner_url;  
+secure_status;
+
+**Call Function For Get Merchant Download Setting**
+``` java
+
+Call<MerchantDownloadSettings> merchantDownloadSettingsCall= mzApiClient.getMerchantServices("Your Access Token").getMerchantDownloadSetting();
+
+```
+
+**Return**
+merchant_id;  
+coupon_number_encoding;  
+gs1_gln;  
+sms_charge_flag;  
+option_id;  
+option_name;  
+policy_url;  
+analytic_id;  
+analytic_name;  
+header_script;  
+body_script_start;  
+body_script_end;  
+wallet_status;  
+serial_status;  
+single_bundle_status;  
+booklet_status;  
+event_status;  
+shop_status;  
+daily_issue_limit_flag;  
+reference_flag;  
+supervisor_flag;  
+supervisor_pin_code;  
+low_inventory_email;  
+refund_email;  
+b2b_marketplace;  
+updated_by;  
+email_footer;  
+selected_language;  
+localization;  
+default_lang;
+
 **Call Function For Active Coupon List**
 ![](https://mzcoupon.s3.ap-southeast-1.amazonaws.com/logo/8F0A4D7B-9E6A-478E-827E-F94BD7ABF835.jpg)
  
@@ -384,6 +629,139 @@ updated_on;
 po_total;  
 ArrayList<**CustomerCouponData**>;
 
+
+
+**Call Function For REDEEM COUPON ---  Redeem Coupon**
+``` java
+ExpressRedeemModel expressRedeemModel=new ExpressRedeemModel();  
+  
+TxnRedeem txnRedeem=new TxnRedeem();  
+txnRedeem.setLang("en");  
+txnRedeem.setTransaction_by("Pin Redemption");  
+txnRedeem.setTransaction_note("Test");  
+txnRedeem.setOutlet_id("RH11X");  
+  
+TxnSerial txnSerial=new TxnSerial();  
+txnSerial.setSerial("5JZIFPLVRJ");  
+txnSerial.setRedeem_value(0);  
+  
+ArrayList<TxnSerial> txnSerialList=new ArrayList();  
+txnSerialList.add(txnSerial);  
+  
+expressRedeemModel.setTxn_redeem(txnRedeem);  
+expressRedeemModel.setTxn_serials(txnSerialList);  
+  
+Call<RedeemResponse> loginResponseCall= mzApiClient.getRedeemService("Your AccessToken",expressRedeemModel).PostRedeem();
+```
+
+**Return**
+outlet_id;  
+created_on;  
+hash_code;  
+order_date;  
+order_no;  
+order_status;  
+order_type;  
+updated_on;  
+customer_id;  
+merchant_id;  
+lang;  
+transaction_id;  
+guestckId;  
+branchCode;
+
+
+
+**Call Function For REDEEM COUPON ---  Redeem Commit Coupon**
+``` java
+RedeemCommit redeemCommit=new RedeemCommit();  
+  
+redeemCommit.setTransaction_note("Redeem commit");  
+  
+Call<RedeemResponseModel> loginResponseCall= mzApiClient.getRedeemCommitService("Your AccessToken",redeemCommit).PostRedeemCommit("transaction_id");
+```
+
+**Return**
+outlet_id;  
+created_on;  
+hash_code;  
+order_date;  
+order_no;  
+order_status;  
+order_type;  
+updated_on;  
+customer_id;  
+merchant_id;  
+lang;  
+transaction_id;  
+guestckId;  
+branchCode;
+
+
+**Call Function For REDEEM COUPON ---  Redeem Rollback Coupon**
+``` java
+RedeemCommit redeemCommit=new RedeemCommit();  
+  
+redeemCommit.setTransaction_note("rollback serial04012022");  
+redeemCommit.setTransaction_ref_no("Rollbacked 04012022");  
+  
+Call<RedeemResponse> loginResponseCall= mzApiClient.getRedeemRollBackService("Your AccessToken",redeemCommit).PostRedeemRollBack("transaction_id");
+```
+
+**Return**
+outlet_id;  
+created_on;  
+hash_code;  
+order_date;  
+order_no;  
+order_status;  
+order_type;  
+updated_on;  
+customer_id;  
+merchant_id;  
+lang;  
+transaction_id;  
+guestckId;  
+branchCode;
+
+
+**Call Function For REDEEM COUPON ---  Redeem Void Coupon**
+``` java
+TransationVoidModel transationVoidModel=new TransationVoidModel();  
+ArrayList<String> txnSerialList=new ArrayList<>();  
+txnSerialList.add("6XOV29LMQL");  
+  
+TxnVoid txnVoid=new TxnVoid();  
+txnVoid.setLang("en");  
+txnVoid.setDelivery_method("E");  
+txnVoid.setRemarks("Mezzofy");  
+txnVoid.setReference_id("RH11X");  
+txnVoid.setTemplate_id("REFUND_HYATT_COUPON");  
+  
+txnVoid.setOutlet_id("RH11X");  
+  
+transationVoidModel.setTxn_void(txnVoid);  
+transationVoidModel.setTxn_serials(txnSerialList);  
+  
+Call<RedeemResponse> loginResponseCall= mzApiClient.getTransactionService("Your AccessToken",transationVoidModel).PostVoidRedeemCoupon();
+```
+
+**Return**
+outlet_id;  
+created_on;  
+hash_code;  
+order_date;  
+order_no;  
+order_status;  
+order_type;  
+updated_on;  
+customer_id;  
+merchant_id;  
+lang;  
+transaction_id;  
+guestckId;  
+branchCode;
+
 **Call Function For Serial Detail By Customer**
 
 ``` java
@@ -437,43 +815,6 @@ Call<SerialResponse> serialResponseCall= mzApiClient.getSerialServices("Your Acc
 
  Summary summary;  
 List<CouponSerialResults> results;
-
-
-
-**Call Function For Get Customer Detail**
-
- 
-
-``` java
-Call<CustomerData> customerDataCall= mzApiClient.getCustomerServices("Your Access Token").getCustomerDetailByCustomerId("CustomerId");  
-```
-
-**Return**
-CustomerData;
-
-
-**Call Function For Get Merchant Setting**
-
- 
-
-``` java
-
-Call<MerchantSettingModel> merchantSettingModelCall= mzApiClient.getCustomerServices("Your Access Token").getMerchantSetting();
-  
-```
-
-**Return**
-MerchantSettingModel;
-
-**Call Function For Get Merchant Download Setting**
-``` java
-
-Call<MerchantDownloadSettings> merchantDownloadSettingsCall= mzApiClient.getMerchantServices("Your Access Token").getMerchantDownloadSetting();
-
-```
-
-**Return**
-MerchantDownloadSettingsData;
 
 
 **Call Function For Get Outlet By CouponCode**
