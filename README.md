@@ -99,7 +99,6 @@ Login to Merchant Account
 ### Implementation Guide
 
   
-
 **Call Function For Authentication Bearer Token**
 
 ```java
@@ -130,7 +129,7 @@ customerCouponAccessToken;
 customerCouponAccessTokenExpiresAt;
 
 
-**Call Function For CUSTOMER -Register **
+**Call Function For CUSTOMER -Register** 
 
 ```java
 
@@ -167,7 +166,7 @@ user_type;
 customer_status;
 
 
-**Call Function For CUSTOMER -Login **
+**Call Function For CUSTOMER -Login**
 
 ```java
 
@@ -201,7 +200,7 @@ user_type;
 customer_status;
 
 
-**Call Function For CUSTOMER -Forgot Password **
+**Call Function For CUSTOMER -Forgot Password** 
 
 ```java
 
@@ -227,7 +226,7 @@ user_type;
 customer_status;
 otp_code;
 
-**Call Function For CUSTOMER -Change  Password **
+**Call Function For CUSTOMER -Change  Password** 
 
 ```java
 
@@ -257,10 +256,8 @@ customer_address;
 user_type;  
 customer_status;
 
-
-**Call Function For CUSTOMER -Update Customer Profile   **
-
-```java
+**Call Function For CUSTOMER -Update Customer Profile**
+``` java
 
 Map<String, String> params = new HashMap<String, String>();  
 params.put("lang", "en");  
@@ -281,7 +278,6 @@ customerData.setReference_no("12345");
 customerModel.setCustomer(customerData);  
   
 Call<CustomerModel> customerDataCall= mzApiClient.getCustomerUpdateService("Your Access Token",customerModel).CustomerProfileUpdate("CustomerId",params);
-
 ```
 
 **Return**
