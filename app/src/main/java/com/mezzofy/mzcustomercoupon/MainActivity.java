@@ -10,6 +10,9 @@ import com.mezzofy.mzcustomercouponlib.Data.CouponData;
 import com.mezzofy.mzcustomercouponlib.Data.CouponModel;
 import com.mezzofy.mzcustomercouponlib.Data.CouponTransferModel;
 import com.mezzofy.mzcustomercouponlib.Data.CustomerData;
+import com.mezzofy.mzcustomercouponlib.Data.CustomerModel;
+import com.mezzofy.mzcustomercouponlib.Data.CustomerRegisterData;
+import com.mezzofy.mzcustomercouponlib.Data.CustomerRegisterModel;
 import com.mezzofy.mzcustomercouponlib.Data.ExpressRedeemModel;
 import com.mezzofy.mzcustomercouponlib.Data.IssueCommitData;
 import com.mezzofy.mzcustomercouponlib.Data.IssueCommitResponseData;
@@ -20,11 +23,16 @@ import com.mezzofy.mzcustomercouponlib.Data.IssueCustomer;
 import com.mezzofy.mzcustomercouponlib.Data.LoginRequest;
 import com.mezzofy.mzcustomercouponlib.Data.LoginResponse;
 import com.mezzofy.mzcustomercouponlib.Data.MerchantDownloadSettings;
+import com.mezzofy.mzcustomercouponlib.Data.MerchantModel;
 import com.mezzofy.mzcustomercouponlib.Data.MerchantSettingModel;
 import com.mezzofy.mzcustomercouponlib.Data.OutletProfile;
 import com.mezzofy.mzcustomercouponlib.Data.OutletProfileModel;
+import com.mezzofy.mzcustomercouponlib.Data.PaymentModel;
+import com.mezzofy.mzcustomercouponlib.Data.RedeemCommit;
+import com.mezzofy.mzcustomercouponlib.Data.RedeemResponse;
 import com.mezzofy.mzcustomercouponlib.Data.RedeemResponseModel;
 import com.mezzofy.mzcustomercouponlib.Data.SerialResponse;
+import com.mezzofy.mzcustomercouponlib.Data.TransactionModel;
 import com.mezzofy.mzcustomercouponlib.Data.TransationVoidModel;
 import com.mezzofy.mzcustomercouponlib.Data.TransferCouponResponseData;
 import com.mezzofy.mzcustomercouponlib.Data.TransferTo;
@@ -50,28 +58,189 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        login();
-        SerialDealList();
-        CouponDetail();
-        SerialList();
-        SerialListbyCouponId();
-        SerialListHistorybyCustomerId();
-        getCustomerDetail();
-        getMerchantSetting();
-        getMerchantDownloadSetting();
-        getOutletByCouponCode();
-        getOutletByRedeemPass();
+//        login();
+//        SerialDealList();
+//        CouponDetail();
+//        SerialList();
+//        SerialListbyCouponId();
+//        SerialListHistorybyCustomerId();
+//        getCustomerDetail();
+//        getMerchantSetting();
+//        getMerchantDownloadSetting();
+//        getMerchantDetailByMerchantId();
+//        getOutletByCouponCode();
+//        getOutletByRedeemPass();
+//
+//
+//        //Transation API's
+//        postIssueCouponRollback();
+//        postIssueCommitCoupon();
+//        postIssueCoupon();
+//        postTransferCoupon();
+//        postVoidCoupon();
+//        postExpressRedeem();
+//        postRedeem();
+//        postRedeemCommit();
+//        postRedeemRollback();
+//        postRedeemVoidCoupon();
+
+//        Customer API's
+
+//        postForgotCustomerPassword();
+//         UpdateCustomerPassWord();
+//        postCustomerLoginAuth();
+//        postCustomerRegister();
+//        CustomerProfileUpdate();
+
+        //Payment API's
+//        getPaymentlist();
+        getActiveTractionByStatus();
 
 
-        //Transation API's
-        postIssueCouponRollback();
-        postIssueCommitCoupon();
-        postIssueCoupon();
-        postTransferCoupon();
-        postVoidCoupon();
-        postExpressRedeem();
+    }
+
+    public void UpdateCustomerPassWord(){
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("lang", "en");
+        params.put("otp_code","526151");
 
 
+        CustomerData customerData=new CustomerData();
+        customerData.setNew_password("12345678");
+
+        Call<CustomerData> customerDataCall= mzApiClient.getCustomerUpdatePasswordService("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik9MVE1GMyIsInBhc3N3b3JkIjoiOFFZVSIsImlhdCI6MTY1NDA1OTMyNywiZXhwIjoxNjU0MDg4MTI3fQ.PZuqJodPdWSDLJ_n5SMmCOKTHPGP5amQ0zlLh3iHAk8",customerData).CustomerUpdatePassword("XYY9YG",params);
+
+        customerDataCall.enqueue(new Callback<CustomerData>() {
+            @Override
+            public void onResponse(Call<CustomerData> call, Response<CustomerData> response) {
+                Log.e("TAG", "onResponse: Success");
+            }
+            @Override
+            public void onFailure(Call<CustomerData> call, Throwable t) {
+                Log.e("TAG", "failed: ");
+            }
+        });
+    }
+
+
+    public void CustomerProfileUpdate(){
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("lang", "en");
+        params.put("encrypted","y");
+
+        CustomerModel customerModel=new CustomerModel();
+
+        CustomerData customerData=new CustomerData();
+        customerData.setCustomer_email("aruna@inforios.com");
+        customerData.setCustomer_password("12345678");
+        customerData.setCustomer_first_name("Aruna");
+        customerData.setCustomer_last_name("R");
+        customerData.setCustomer_gender("F");
+        customerData.setTemplate_id("MZ_CUSTOMER_UPDATE_PROFILE");
+        customerData.setCustomer_code("Mezzofy");
+        customerData.setReference_no("12345");
+
+
+        customerModel.setCustomer(customerData);
+
+
+        Call<CustomerModel> customerDataCall= mzApiClient.getCustomerUpdateService("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik9MVE1GMyIsInBhc3N3b3JkIjoiOFFZVSIsImlhdCI6MTY1NDA1OTMyNywiZXhwIjoxNjU0MDg4MTI3fQ.PZuqJodPdWSDLJ_n5SMmCOKTHPGP5amQ0zlLh3iHAk8",customerModel).CustomerProfileUpdate("XYY9YG",params);
+
+        customerDataCall.enqueue(new Callback<CustomerModel>() {
+            @Override
+            public void onResponse(Call<CustomerModel> call, Response<CustomerModel> response) {
+                Log.e("TAG", "onResponse: Success");
+            }
+            @Override
+            public void onFailure(Call<CustomerModel> call, Throwable t) {
+                Log.e("TAG", "failed: ");
+            }
+        });
+    }
+
+    public void postForgotCustomerPassword(){
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("encrypted", "y");
+        params.put("lang", "en");
+
+
+        Call<CustomerData> customerDataCall= mzApiClient.getCustomerServices("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik9MVE1GMyIsInBhc3N3b3JkIjoiOFFZVSIsImlhdCI6MTY1NDA1OTMyNywiZXhwIjoxNjU0MDg4MTI3fQ.PZuqJodPdWSDLJ_n5SMmCOKTHPGP5amQ0zlLh3iHAk8").postCustomerForgotPassword("shankar.j@mezzofy.com",params);
+
+        customerDataCall.enqueue(new Callback<CustomerData>() {
+            @Override
+            public void onResponse(Call<CustomerData> call, Response<CustomerData> response) {
+                Log.e("TAG", "onResponse: Success");
+            }
+            @Override
+            public void onFailure(Call<CustomerData> call, Throwable t) {
+                Log.e("TAG", "failed: ");
+            }
+        });
+    }
+
+    public void postCustomerLoginAuth(){
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("lang", "en");
+
+        CustomerModel customerModel=new CustomerModel();
+
+        CustomerData customerData=new CustomerData();
+        customerData.setCustomer_email("palani@inforios.com");
+        customerData.setCustomer_password("12345678");
+
+        customerModel.setCustomer(customerData);
+
+
+        Call<CustomerModel> customerDataCall= mzApiClient.getCustomerAuthService("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik9MVE1GMyIsInBhc3N3b3JkIjoiOFFZVSIsImlhdCI6MTY1NDA1OTMyNywiZXhwIjoxNjU0MDg4MTI3fQ.PZuqJodPdWSDLJ_n5SMmCOKTHPGP5amQ0zlLh3iHAk8",customerModel).postCustomerLoginAuth(params);
+
+        customerDataCall.enqueue(new Callback<CustomerModel>() {
+            @Override
+            public void onResponse(Call<CustomerModel> call, Response<CustomerModel> response) {
+                Log.e("TAG", "onResponse: Success");
+            }
+            @Override
+            public void onFailure(Call<CustomerModel> call, Throwable t) {
+                Log.e("TAG", "failed: ");
+            }
+        });
+    }
+
+
+    public void postCustomerRegister(){
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("delivery_method", "S");
+
+        CustomerRegisterModel customerModel=new CustomerRegisterModel();
+
+        CustomerRegisterData customerData=new CustomerRegisterData();
+        customerData.setCustomer_email("aruna6@mezzofy.com");
+        customerData.setCustomer_first_name("tester");
+        customerData.setCustomer_mobile("+919962542287");
+        customerData.setUser_type("C");
+        customerData.setCustomer_password("12345678");
+        customerData.setCountry_code("IN");
+
+
+        customerModel.setCustomer(customerData);
+
+
+        Call<CustomerRegisterModel> customerDataCall= mzApiClient.getCustomerRegisterService("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik9MVE1GMyIsInBhc3N3b3JkIjoiOFFZVSIsImlhdCI6MTY1NDA1OTMyNywiZXhwIjoxNjU0MDg4MTI3fQ.PZuqJodPdWSDLJ_n5SMmCOKTHPGP5amQ0zlLh3iHAk8",customerModel).postCustomerRegister(params);
+
+        customerDataCall.enqueue(new Callback<CustomerRegisterModel>() {
+            @Override
+            public void onResponse(Call<CustomerRegisterModel> call, Response<CustomerRegisterModel> response) {
+                Log.e("TAG", "onResponse: Success");
+            }
+            @Override
+            public void onFailure(Call<CustomerRegisterModel> call, Throwable t) {
+                Log.e("TAG", "failed: ");
+            }
+        });
     }
 
     public void postIssueCouponRollback(){
@@ -234,7 +403,7 @@ public class MainActivity extends AppCompatActivity {
         expressRedeemModel.setTxn_redeem(txnRedeem);
         expressRedeemModel.setTxn_serials(txnSerialList);
 
-        Call<RedeemResponseModel> loginResponseCall= mzApiClient.getRedeemService("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik9MVE1GMyIsInBhc3N3b3JkIjoiOFFZVSIsImlhdCI6MTY1MzMwMzQ2NiwiZXhwIjoxNjUzMzMyMjY2fQ.BI0BeJoSw3IbOeLwYP35ixXiAEHU6bT9KxntGX4Rcqs",expressRedeemModel).PostExpressRedeem();
+        Call<RedeemResponseModel> loginResponseCall= mzApiClient.getRedeemExpressService("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik9MVE1GMyIsInBhc3N3b3JkIjoiOFFZVSIsImlhdCI6MTY1MzMwMzQ2NiwiZXhwIjoxNjUzMzMyMjY2fQ.BI0BeJoSw3IbOeLwYP35ixXiAEHU6bT9KxntGX4Rcqs",expressRedeemModel).PostExpressRedeem();
 
         loginResponseCall.enqueue(new Callback<RedeemResponseModel>() {
             @Override
@@ -248,6 +417,129 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<RedeemResponseModel> call, Throwable t) {
                 Log.d("TAG", "onResponse: Fail"+t.toString());
+            }
+        });
+    }
+
+
+    public void postRedeem(){
+        ExpressRedeemModel expressRedeemModel=new ExpressRedeemModel();
+
+        TxnRedeem txnRedeem=new TxnRedeem();
+        txnRedeem.setLang("en");
+        txnRedeem.setTransaction_by("Pin Redemption");
+        txnRedeem.setTransaction_note("Test");
+        txnRedeem.setOutlet_id("RH11X");
+
+        TxnSerial txnSerial=new TxnSerial();
+        txnSerial.setSerial("5JZIFPLVRJ");
+        txnSerial.setRedeem_value(0);
+
+        ArrayList<TxnSerial> txnSerialList=new ArrayList();
+        txnSerialList.add(txnSerial);
+
+        expressRedeemModel.setTxn_redeem(txnRedeem);
+        expressRedeemModel.setTxn_serials(txnSerialList);
+
+        Call<RedeemResponse> loginResponseCall= mzApiClient.getRedeemService("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik9MVE1GMyIsInBhc3N3b3JkIjoiOFFZVSIsImlhdCI6MTY1MzYyODIwMCwiZXhwIjoxNjUzNjU3MDAwfQ.6388uP6nuD6ZJ29DjmKD_sHbHws_QcQqTk8NmxBKOhI",expressRedeemModel).PostRedeem();
+
+        loginResponseCall.enqueue(new Callback<RedeemResponse>() {
+            @Override
+            public void onResponse(Call<RedeemResponse> call, Response<RedeemResponse> response) {
+                Log.d("msg", "onResponse: "+response.toString());
+                if(response.isSuccessful())
+                    Log.d("msg", "onResponse: Success"+response.body().toString());
+                else
+                    Log.d("msg", "onResponse: Success"+response.raw().toString());
+            }
+            @Override
+            public void onFailure(Call<RedeemResponse> call, Throwable t) {
+                Log.d("TAG", "onResponse: Fail"+t.toString());
+            }
+        });
+    }
+
+    public void postRedeemCommit(){
+        RedeemCommit redeemCommit=new RedeemCommit();
+
+        redeemCommit.setTransaction_note("Redeem commit");
+
+        Call<RedeemResponseModel> loginResponseCall= mzApiClient.getRedeemCommitService("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik9MVE1GMyIsInBhc3N3b3JkIjoiOFFZVSIsImlhdCI6MTY1MzYyODIwMCwiZXhwIjoxNjUzNjU3MDAwfQ.6388uP6nuD6ZJ29DjmKD_sHbHws_QcQqTk8NmxBKOhI",redeemCommit).PostRedeemCommit("IF6F4JOZSRPUNGM47T5J");
+
+        loginResponseCall.enqueue(new Callback<RedeemResponseModel>() {
+            @Override
+            public void onResponse(Call<RedeemResponseModel> call, Response<RedeemResponseModel> response) {
+                Log.d("msg", "onResponse: "+response.toString());
+                if(response.isSuccessful())
+                    Log.d("msg", "onResponse: Success"+response.body().toString());
+                else
+                    Log.d("msg", "onResponse: Success"+response.raw().toString());
+            }
+            @Override
+            public void onFailure(Call<RedeemResponseModel> call, Throwable t) {
+                Log.d("TAG", "onResponse: Fail"+t.toString());
+            }
+        });
+    }
+
+
+    public void postRedeemRollback(){
+        RedeemCommit redeemCommit=new RedeemCommit();
+
+        redeemCommit.setTransaction_note("rollback serial04012022");
+        redeemCommit.setTransaction_ref_no("Rollbacked 04012022");
+
+
+
+        Call<RedeemResponse> loginResponseCall= mzApiClient.getRedeemRollBackService("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik9MVE1GMyIsInBhc3N3b3JkIjoiOFFZVSIsImlhdCI6MTY1MzYyODIwMCwiZXhwIjoxNjUzNjU3MDAwfQ.6388uP6nuD6ZJ29DjmKD_sHbHws_QcQqTk8NmxBKOhI",redeemCommit).PostRedeemRollBack("1J4CBOIBX9XLFN6DPN31");
+
+        loginResponseCall.enqueue(new Callback<RedeemResponse>() {
+            @Override
+            public void onResponse(Call<RedeemResponse> call, Response<RedeemResponse> response) {
+                Log.d("msg", "onResponse: "+response.toString());
+                if(response.isSuccessful())
+                    Log.d("msg", "onResponse: Success"+response.body().toString());
+                else
+                    Log.d("msg", "onResponse: Success"+response.raw().toString());
+            }
+            @Override
+            public void onFailure(Call<RedeemResponse> call, Throwable t) {
+                Log.d("TAG", "onResponse: Fail"+t.toString());
+            }
+        });
+    }
+
+    public void postRedeemVoidCoupon(){
+        TransationVoidModel transationVoidModel=new TransationVoidModel();
+        ArrayList<String> txnSerialList=new ArrayList<>();
+        txnSerialList.add("6XOV29LMQL");
+
+        TxnVoid txnVoid=new TxnVoid();
+        txnVoid.setLang("en");
+        txnVoid.setDelivery_method("E");
+        txnVoid.setRemarks("Mezzofy");
+        txnVoid.setReference_id("RH11X");
+        txnVoid.setTemplate_id("REFUND_HYATT_COUPON");
+
+        txnVoid.setOutlet_id("RH11X");
+
+        transationVoidModel.setTxn_void(txnVoid);
+        transationVoidModel.setTxn_serials(txnSerialList);
+
+        Call<RedeemResponse> loginResponseCall= mzApiClient.getTransactionService("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik9MVE1GMyIsInBhc3N3b3JkIjoiOFFZVSIsImlhdCI6MTY1Mzk3Mzc0OSwiZXhwIjoxNjU0MDAyNTQ5fQ.CynAT_SYUW-H20CRk6qhDlrvcZ4--jRrk00n0bZXVo0",transationVoidModel).PostVoidRedeemCoupon();
+
+        loginResponseCall.enqueue(new Callback<RedeemResponse>() {
+            @Override
+            public void onResponse(Call<RedeemResponse> call, Response<RedeemResponse> response) {
+                Log.d("msg", "onResponse: "+response.toString());
+                if(response.isSuccessful())
+                    Log.d("msg", "onResponse: Success"+response.body().toString());
+                else
+                    Log.d("msg", "onResponse: Success"+response.errorBody().toString());
+            }
+            @Override
+            public void onFailure(Call<RedeemResponse> call, Throwable t) {
+                Log.d("TAG", "onResponse: Fail");
             }
         });
     }
@@ -271,7 +563,7 @@ public class MainActivity extends AppCompatActivity {
         transationVoidModel.setTxn_void(txnVoid);
         transationVoidModel.setTxn_serials(txnSerialList);
 
-        Call<VoidIssueReponseData> loginResponseCall= mzApiClient.getTransactionService("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik9MVE1GMyIsInBhc3N3b3JkIjoiOFFZVSIsImlhdCI6MTY1MzMwMzQ2NiwiZXhwIjoxNjUzMzMyMjY2fQ.BI0BeJoSw3IbOeLwYP35ixXiAEHU6bT9KxntGX4Rcqs",transationVoidModel).postCouponVoid();
+        Call<VoidIssueReponseData> loginResponseCall= mzApiClient.getTransactionService("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik9MVE1GMyIsInBhc3N3b3JkIjoiOFFZVSIsImlhdCI6MTY1MzMwMzQ2NiwiZXhwIjoxNjUzMzMyMjY2fQ.BI0BeJoSw3IbOeLwYP35ixXiAEHU6bT9KxntGX4Rcqs",transationVoidModel).postIssueCouponVoid();
 
         loginResponseCall.enqueue(new Callback<VoidIssueReponseData>() {
             @Override
@@ -308,6 +600,60 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("TAG", "onResponse: Fail");
             }
         });
+    }
+
+
+
+    public void getMerchantDetailByMerchantId(){
+
+        Call<MerchantModel> merchantModelCall= mzApiClient.getMerchantServices("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik9MVE1GMyIsInBhc3N3b3JkIjoiOFFZVSIsImlhdCI6MTY1NDE0MjY2NSwiZXhwIjoxNjU0MTcxNDY1fQ.xhdMY8EtkkGnsByCq7SEUznl2tXxl2NUuqLP7pQp7pI").getMerchantDetailByMerchantId("8QYU");
+
+        merchantModelCall.enqueue(new Callback<MerchantModel>() {
+            @Override
+            public void onResponse(Call<MerchantModel> call, Response<MerchantModel> response) {
+                Log.e("TAG", "onResponse: Success");
+            }
+            @Override
+            public void onFailure(Call<MerchantModel> call, Throwable t) {
+                Log.e("TAG", "failed: ");
+            }
+        });
+    }
+
+    public void getActiveTractionByStatus(){
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("status", "I");
+
+        Call<TransactionModel> merchantModelCall= mzApiClient.getTransactionService("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik9MVE1GMyIsInBhc3N3b3JkIjoiOFFZVSIsImlhdCI6MTY1NDE0MjY2NSwiZXhwIjoxNjU0MTcxNDY1fQ.xhdMY8EtkkGnsByCq7SEUznl2tXxl2NUuqLP7pQp7pI").getActiveTransactionByStatus("I3DTES",params);
+
+        merchantModelCall.enqueue(new Callback<TransactionModel>() {
+            @Override
+            public void onResponse(Call<TransactionModel> call, Response<TransactionModel> response) {
+                Log.e("TAG", "onResponse: Success");
+            }
+            @Override
+            public void onFailure(Call<TransactionModel> call, Throwable t) {
+                Log.e("TAG", "failed: ");
+            }
+        });
+    }
+
+    public void getPaymentlist(){
+
+        Call<PaymentModel> paymentModelCall= mzApiClient.getPaymentServices("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik9MVE1GMyIsInBhc3N3b3JkIjoiOFFZVSIsImlhdCI6MTY1NDE0MjY2NSwiZXhwIjoxNjU0MTcxNDY1fQ.xhdMY8EtkkGnsByCq7SEUznl2tXxl2NUuqLP7pQp7pI").getPaymentlist();
+
+        paymentModelCall.enqueue(new Callback<PaymentModel>() {
+            @Override
+            public void onResponse(Call<PaymentModel> call, Response<PaymentModel> response) {
+                Log.e("TAG", "onResponse: Success");
+            }
+            @Override
+            public void onFailure(Call<PaymentModel> call, Throwable t) {
+                Log.e("TAG", "failed: ");
+            }
+        });
+
     }
 
 

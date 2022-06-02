@@ -2,11 +2,15 @@ package com.mezzofy.mzcustomercouponlib.RemoteUtils;
 
 import com.google.gson.Gson;
 import com.mezzofy.mzcustomercouponlib.Data.CouponTransferModel;
+import com.mezzofy.mzcustomercouponlib.Data.CustomerData;
+import com.mezzofy.mzcustomercouponlib.Data.CustomerModel;
+import com.mezzofy.mzcustomercouponlib.Data.CustomerRegisterModel;
 import com.mezzofy.mzcustomercouponlib.Data.ExpressRedeemModel;
 import com.mezzofy.mzcustomercouponlib.Data.IssueCommitData;
 import com.mezzofy.mzcustomercouponlib.Data.IssueCommitResponseData;
 import com.mezzofy.mzcustomercouponlib.Data.IssueCouponModel;
 import com.mezzofy.mzcustomercouponlib.Data.LoginRequest;
+import com.mezzofy.mzcustomercouponlib.Data.RedeemCommit;
 import com.mezzofy.mzcustomercouponlib.Data.Transactions;
 import com.mezzofy.mzcustomercouponlib.Data.TransationVoidModel;
 
@@ -97,6 +101,32 @@ public class mzApiClient {
     }
 
 
+    private static Retrofit PutDataAuthBearer(String token,String url,String jsonString){
+        HttpLoggingInterceptor httpLoggingInterceptor=new HttpLoggingInterceptor();
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        RequestBody body=RequestBody.create(MediaType.parse("application/json"),jsonString.trim());
+
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request newRequest  = chain.request().newBuilder()
+                        .addHeader("Authorization", "Bearer " + token)
+                        .put(body).build();
+
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+        Retrofit retrofit=new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(url)
+                .client(client)
+                .build();
+
+        return retrofit;
+    }
+
 
     public static class BasicAuthInterceptor implements Interceptor {
 
@@ -142,12 +172,45 @@ public class mzApiClient {
         return couponServices;
     }
 
+    public static PaymentService getPaymentServices(String token){
+        PaymentService paymentService=getBearerRetrofit(token,"https://payment.mzapi.mezzofy.com/").create(PaymentService.class);
+        return paymentService;
+    }
+
     public static CustomerService getCustomerServices(String token){
         CustomerService customerService=getBearerRetrofit(token,"https://customer.mzapi.mezzofy.com/").create(CustomerService.class);
         return customerService;
     }
 
-    public static RedeemService getRedeemService(String token, ExpressRedeemModel redeemobject){
+    public static CustomerService getCustomerAuthService(String token, CustomerModel redeemobject){
+        Gson gson = new Gson();
+        String postString=gson.toJson(redeemobject).toString();
+        CustomerService customerService=PostDataAuthBearer(token,"https://customer.mzapi.mezzofy.com/",postString).create(CustomerService.class);
+        return customerService;
+    }
+
+    public static CustomerService getCustomerUpdateService(String token, CustomerModel redeemobject){
+        Gson gson = new Gson();
+        String postString=gson.toJson(redeemobject).toString();
+        CustomerService customerService=PutDataAuthBearer(token,"https://customer.mzapi.mezzofy.com/",postString).create(CustomerService.class);
+        return customerService;
+    }
+
+    public static CustomerService getCustomerUpdatePasswordService(String token, CustomerData redeemobject){
+        Gson gson = new Gson();
+        String postString=gson.toJson(redeemobject).toString();
+        CustomerService customerService=PutDataAuthBearer(token,"https://customer.mzapi.mezzofy.com/",postString).create(CustomerService.class);
+        return customerService;
+    }
+
+    public static CustomerService getCustomerRegisterService(String token, CustomerRegisterModel redeemobject){
+        Gson gson = new Gson();
+        String postString=gson.toJson(redeemobject).toString();
+        CustomerService customerService=PostDataAuthBearer(token,"https://customer.mzapi.mezzofy.com/",postString).create(CustomerService.class);
+        return customerService;
+    }
+
+    public static RedeemService getRedeemExpressService(String token, ExpressRedeemModel redeemobject){
         Gson gson = new Gson();
         String postString=gson.toJson(redeemobject).toString();
         RedeemService redeemService=PostDataAuthBearer(token,"https://exredeem.mzapi.mezzofy.com/",postString).create(RedeemService.class);
@@ -158,6 +221,11 @@ public class mzApiClient {
         Gson gson = new Gson();
         String postString=gson.toJson(redeemobject).toString();
         TransactionService transactionService=PostDataAuthBearer(token,"https://transaction.mzapi.mezzofy.com/",postString).create(TransactionService.class);
+        return transactionService;
+    }
+
+    public static TransactionService getTransactionService(String token){
+        TransactionService transactionService=getBearerRetrofit(token,"https://activities.mzapi.mezzofy.com/").create(TransactionService.class);
         return transactionService;
     }
 
@@ -197,6 +265,27 @@ public class mzApiClient {
     public static OutletService getOutletService(String token){
         OutletService outletService=getBearerRetrofit(token,"https://outlet.mzapi.mezzofy.com/").create(OutletService.class);
         return outletService;
+    }
+
+    public static RedeemService getRedeemService(String token,  ExpressRedeemModel redeemobject){
+        Gson gson = new Gson();
+        String postString=gson.toJson(redeemobject).toString();
+        RedeemService redeemService=PostDataAuthBearer(token,"https://transaction.mzapi.mezzofy.com/",postString).create(RedeemService.class);
+        return redeemService;
+    }
+
+    public static RedeemService getRedeemCommitService(String token,  RedeemCommit redeemobject){
+        Gson gson = new Gson();
+        String postString=gson.toJson(redeemobject).toString();
+        RedeemService redeemService=PostDataAuthBearer(token,"https://transaction.mzapi.mezzofy.com/",postString).create(RedeemService.class);
+        return redeemService;
+    }
+
+    public static RedeemService getRedeemRollBackService(String token,  RedeemCommit redeemobject){
+        Gson gson = new Gson();
+        String postString=gson.toJson(redeemobject).toString();
+        RedeemService redeemService=PostDataAuthBearer(token,"https://transaction.mzapi.mezzofy.com/",postString).create(RedeemService.class);
+        return redeemService;
     }
 
 }

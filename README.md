@@ -130,7 +130,7 @@ customerCouponAccessTokenExpiresAt;
 
 
 **Call Function For CUSTOMER -Register** 
-
+![](https://mzcoupon.s3.ap-southeast-1.amazonaws.com/app/image_2022_06_02T06_14_07_011Z.png)
 ```java
 
 Map<String, String> params = new HashMap<String, String>();  
@@ -167,7 +167,7 @@ customer_status;
 
 
 **Call Function For CUSTOMER -Login**
-
+![](https://mzcoupon.s3.ap-southeast-1.amazonaws.com/app/image_2022_06_02T06_14_16_110Z.png)
 ```java
 
 Map<String, String> params = new HashMap<String, String>();  
@@ -201,7 +201,7 @@ customer_status;
 
 
 **Call Function For CUSTOMER -Forgot Password** 
-
+![](https://mzcoupon.s3.ap-southeast-1.amazonaws.com/app/image_2022_06_02T06_14_27_135Z.png)
 ```java
 
 Map<String, String> params = new HashMap<String, String>();  
@@ -226,8 +226,8 @@ user_type;
 customer_status;
 otp_code;
 
-**Call Function For CUSTOMER -Change  Password** 
-
+**Call Function For CUSTOMER -New  Password with OTP** 
+![](https://mzcoupon.s3.ap-southeast-1.amazonaws.com/app/image_2022_06_02T06_14_33_168Z.png)
 ```java
 
 Map<String, String> params = new HashMap<String, String>();  
@@ -256,7 +256,11 @@ customer_address;
 user_type;  
 customer_status;
 
+
+
+
 **Call Function For CUSTOMER -Update Customer Profile**
+![](https://mzcoupon.s3.ap-southeast-1.amazonaws.com/app/image_2022_06_02T06_14_40_713Z.png)
 ``` java
 
 Map<String, String> params = new HashMap<String, String>();  
@@ -330,6 +334,45 @@ updated_on;
 banner_url;  
 wallet_banner_url;  
 secure_status;
+
+**Call Function For Get Merchant Detail By Merchant Id**
+``` java
+
+Call<MerchantModel> merchantModelCall= mzApiClient.getMerchantServices("Your Access Token").getMerchantDetailByMerchantId("MerchantId");
+
+```
+
+**Return**
+merchant_id;  
+coupon_number_encoding;  
+gs1_gln;  
+sms_charge_flag;  
+option_id;  
+option_name;  
+policy_url;  
+analytic_id;  
+analytic_name;  
+header_script;  
+body_script_start;  
+body_script_end;  
+wallet_status;  
+serial_status;  
+single_bundle_status;  
+booklet_status;  
+event_status;  
+shop_status;  
+daily_issue_limit_flag;  
+reference_flag;  
+supervisor_flag;  
+supervisor_pin_code;  
+low_inventory_email;  
+refund_email;  
+b2b_marketplace;  
+updated_by;  
+email_footer;  
+selected_language;  
+localization;  
+default_lang;
 
 **Call Function For Get Merchant Download Setting**
 ``` java
@@ -569,6 +612,43 @@ po_total;
 ArrayList<**CustomerCouponData**>;
 
 
+**Call Function For PAYMENT LIST ---(Charge Coupon )**
+
+``` java
+Call<PaymentModel> paymentModelCall= mzApiClient.getPaymentServices("Your AccessToken").getPaymentlist();
+```
+
+**Return**
+payment_id;  
+payment_type;  
+payment_Enviornment;  
+payment_status;  
+payment_detail_id;  
+merchant_id;  
+payment_name;  
+payment_logourl;  
+payment_merchant_id;  
+payment_key;  
+payment_token;  
+payment_url;  
+currency;  
+payment_enviornment;  
+payment_privatekey;  
+decimal_place;  
+merchant_url_prefix;  
+payment_method;  
+payment_client_id;  
+auto_poll_key;  
+auto_poll_merchant_id;  
+uto_poll_secret_key;  
+buyer_type;  
+pay_type;  
+service;  
+signingKey;  
+subject;  
+user_confirm_key;  
+wallet;  
+payment_detail;
 
 **Call Function For ISSUE COUPON ---  Issue Coupon Transfer**
 ``` java
@@ -837,7 +917,19 @@ Map<String, String> params = new HashMap<String, String>();
 params.put("outlet_redeem_pass", "2222");  
   
 Call<OutletProfile> outletProfileModelCall= mzApiClient.getOutletService("Your Access Token").getOutletByRedeemPass(params);
+```
 
+**Return**
+OutletProfile;
+
+**Call Function For Get Active Transaction by Status**
+``` java
+
+Map<String, String> params = new HashMap<String, String>();  
+params.put("status", "I");
+
+Call<TransactionModel> merchantModelCall= mzApiClient.getTransactionService("Your Access Token").getActiveTransactionByStatus("CustomerId",params);
+  
 
 ```
 

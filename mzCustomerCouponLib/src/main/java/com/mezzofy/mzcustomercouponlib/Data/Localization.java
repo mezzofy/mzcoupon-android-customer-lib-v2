@@ -5,6 +5,12 @@ public class Localization {
     private OutletDesc outlet_desc;
     private OutletAddress outlet_address;
 
+    private MerchantName merchant_name;
+    private MerchantAddress merchant_address;
+    private MerchantDesc merchant_desc;
+    private AlternativeName alternative_name;
+    private Tagline tagline;
+
     public OutletName getOutlet_name() {
         return outlet_name;
     }

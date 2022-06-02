@@ -1,6 +1,5 @@
 package com.mezzofy.mzcustomercouponlib.Data;
 
-import java.util.Date;
 
 public class CustomerData {
     private String customer_id;
@@ -12,7 +11,7 @@ public class CustomerData {
     private String customer_username;
     private String customer_password;
     private String customer_email;
-    private Date customer_dob;
+    private String customer_dob;
     private String customer_mobile;
     private String customer_gender;
     private String customer_address;
@@ -22,8 +21,8 @@ public class CustomerData {
     private Object fb_token;
     private String customer_status;
     private String hash_code;
-    private Date created_on;
-    private Date updated_on;
+    private String created_on;
+    private String updated_on;
     private String updated_by;
     private Object customer_image_url;
     private String member_id;
@@ -32,6 +31,24 @@ public class CustomerData {
     private Object customer_code;
     private String profile_status;
     private String wallet_url;
+    private String template_id;
+    private String new_password;
+
+    public String getNew_password() {
+        return new_password;
+    }
+
+    public void setNew_password(String new_password) {
+        this.new_password = new_password;
+    }
+
+    public String getTemplate_id() {
+        return template_id;
+    }
+
+    public void setTemplate_id(String template_id) {
+        this.template_id = template_id;
+    }
 
     public String getCustomer_id() {
         return customer_id;
@@ -105,13 +122,7 @@ public class CustomerData {
         this.customer_email = customer_email;
     }
 
-    public Date getCustomer_dob() {
-        return customer_dob;
-    }
 
-    public void setCustomer_dob(Date customer_dob) {
-        this.customer_dob = customer_dob;
-    }
 
     public String getCustomer_mobile() {
         return customer_mobile;
@@ -185,19 +196,27 @@ public class CustomerData {
         this.hash_code = hash_code;
     }
 
-    public Date getCreated_on() {
+    public String getCustomer_dob() {
+        return customer_dob;
+    }
+
+    public void setCustomer_dob(String customer_dob) {
+        this.customer_dob = customer_dob;
+    }
+
+    public String getCreated_on() {
         return created_on;
     }
 
-    public void setCreated_on(Date created_on) {
+    public void setCreated_on(String created_on) {
         this.created_on = created_on;
     }
 
-    public Date getUpdated_on() {
+    public String getUpdated_on() {
         return updated_on;
     }
 
-    public void setUpdated_on(Date updated_on) {
+    public void setUpdated_on(String updated_on) {
         this.updated_on = updated_on;
     }
 
