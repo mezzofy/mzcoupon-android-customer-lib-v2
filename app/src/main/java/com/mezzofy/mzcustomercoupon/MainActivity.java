@@ -58,42 +58,41 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        login();
-//        SerialDealList();
-//        CouponDetail();
-//        SerialList();
-//        SerialListbyCouponId();
-//        SerialListHistorybyCustomerId();
-//        getCustomerDetail();
-//        getMerchantSetting();
-//        getMerchantDownloadSetting();
-//        getMerchantDetailByMerchantId();
-//        getOutletByCouponCode();
-//        getOutletByRedeemPass();
-//
-//
+        login();
+        SerialDealList();
+        CouponDetail();
+        SerialList();
+        SerialListbyCouponId();
+        SerialListHistorybyCustomerId();
+        getCustomerDetail();
+        getMerchantSetting();
+        getMerchantDownloadSetting();
+        getMerchantDetailByMerchantId();
+        getOutletByCouponCode();
+        getOutletByRedeemPass();
+
 //        //Transation API's
-//        postIssueCouponRollback();
-//        postIssueCommitCoupon();
-//        postIssueCoupon();
-//        postTransferCoupon();
-//        postVoidCoupon();
-//        postExpressRedeem();
-//        postRedeem();
-//        postRedeemCommit();
-//        postRedeemRollback();
-//        postRedeemVoidCoupon();
+        postIssueCouponRollback();
+        postIssueCommitCoupon();
+        postIssueCoupon();
+        postTransferCoupon();
+        postVoidCoupon();
+        postExpressRedeem();
+        postRedeem();
+        postRedeemCommit();
+        postRedeemRollback();
+        postRedeemVoidCoupon();
 
 //        Customer API's
 
-//        postForgotCustomerPassword();
-//         UpdateCustomerPassWord();
+        postForgotCustomerPassword();
+         UpdateCustomerPassWord();
 //        postCustomerLoginAuth();
-//        postCustomerRegister();
-//        CustomerProfileUpdate();
+        postCustomerRegister();
+        CustomerProfileUpdate();
 
         //Payment API's
-//        getPaymentlist();
+        getPaymentlist();
         getActiveTractionByStatus();
 
 
