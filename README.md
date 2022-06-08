@@ -271,7 +271,7 @@ CustomerModel customerModel=new CustomerModel();
   
 CustomerData customerData=new CustomerData();  
 customerData.setCustomer_email("test@test.com");  
-customerData.setCustomer_password("12345678");  
+customerData.setCustomer_password("Password");  
 customerData.setCustomer_first_name("test");  
 customerData.setCustomer_last_name("R");  
 customerData.setCustomer_gender("F");  
@@ -460,19 +460,20 @@ ArrayList<CouponImage>;
 ArrayList<CouponOutlet>;
 
 **Call Function For ISSUE COUPON --- Void Coupon Issue**
+![](https://mzcoupon.s3.ap-southeast-1.amazonaws.com/app/image_2022_06_02T06_15_41_192Z+(1).png)
 ``` java
 TransationVoidModel transationVoidModel=new TransationVoidModel();  
 ArrayList<String> txnSerialList=new ArrayList<>();  
-txnSerialList.add("AOPJBI0S0F");  
+txnSerialList.add("SerialId");  
   
 TxnVoid txnVoid=new TxnVoid();  
 txnVoid.setLang("en");  
 txnVoid.setDelivery_method("E");  
 txnVoid.setRemarks("Mezzofy");  
-txnVoid.setReference_id("FGRU0");  
+txnVoid.setReference_id("OutletId");  
 txnVoid.setTemplate_id("REFUND_MZ_COUPON");  
-txnVoid.setCustomer_id("41K3XI");  
-txnVoid.setOutlet_id("FGRU0");  
+txnVoid.setCustomer_id("CustomerId");  
+txnVoid.setOutlet_id("OutletId");  
   
 transationVoidModel.setTxn_void(txnVoid);  
 transationVoidModel.setTxn_serials(txnSerialList);  
@@ -532,7 +533,7 @@ reference_id;
 IssueCouponModel issueCouponModel=new IssueCouponModel();  
   
 IssueCustomer customer=new IssueCustomer();  
-customer.setCustomer_id("TTB60R");  
+customer.setCustomer_id("CustomerId");  
 customer.setEmail("dannylewis.mt@outlook.com");  
 customer.setMobile_no("919629033132");  
 customer.setName("danny");  
@@ -540,7 +541,7 @@ customer.setName("danny");
 ArrayList<IssueCouponData> issueCouponDataArrayList=new ArrayList<>();  
 IssueCouponData issueCouponData=new IssueCouponData();  
 issueCouponData.setCoupon_count(1);  
-issueCouponData.setCoupon_code("1025480");  
+issueCouponData.setCoupon_code("CouponCode");  
 issueCouponDataArrayList.add(issueCouponData);  
 
 issueCouponModel.setCoupons(issueCouponDataArrayList);  
@@ -613,7 +614,7 @@ ArrayList<**CustomerCouponData**>;
 
 
 **Call Function For PAYMENT LIST ---(Charge Coupon )**
-
+![](https://mzcoupon.s3.ap-southeast-1.amazonaws.com/app/image_2022_06_02T06_15_00_550Z.png)
 ``` java
 Call<PaymentModel> paymentModelCall= mzApiClient.getPaymentServices("Your AccessToken").getPaymentlist();
 ```
@@ -651,10 +652,11 @@ wallet;
 payment_detail;
 
 **Call Function For ISSUE COUPON ---  Issue Coupon Transfer**
+![](https://mzcoupon.s3.ap-southeast-1.amazonaws.com/app/image_2022_06_02T06_15_33_434Z.png)
 ``` java
 CouponTransferModel couponTransferModel=new CouponTransferModel();  
 ArrayList<String> serivals=new ArrayList<>();  
-serivals.add("SCZ0Q099RY");  
+serivals.add("Serial Id");  
 
 TransferTo transferTo=new TransferTo();  
 transferTo.setSerials(serivals);  
@@ -665,7 +667,7 @@ transferTos.add(transferTo);
 
 couponTransferModel.setTransfer_to(transferTos);  
 couponTransferModel.setTransfer_template_id("mezzofy_transfer");  
-couponTransferModel.setCustomer_id("T9N775");  
+couponTransferModel.setCustomer_id("CustomerId");  
 couponTransferModel.setSender_message("Hi, Take your Gift Pack");  
 couponTransferModel.setLang("en");  
   
@@ -715,10 +717,10 @@ TxnRedeem txnRedeem=new TxnRedeem();
 txnRedeem.setLang("en");  
 txnRedeem.setTransaction_by("Pin Redemption");  
 txnRedeem.setTransaction_note("Test");  
-txnRedeem.setOutlet_id("RH11X");  
+txnRedeem.setOutlet_id("OutletId");  
   
 TxnSerial txnSerial=new TxnSerial();  
-txnSerial.setSerial("5JZIFPLVRJ");  
+txnSerial.setSerial("SerivalId");  
 txnSerial.setRedeem_value(0);  
   
 ArrayList<TxnSerial> txnSerialList=new ArrayList();  
@@ -814,7 +816,7 @@ txnVoid.setRemarks("Mezzofy");
 txnVoid.setReference_id("RH11X");  
 txnVoid.setTemplate_id("REFUND_HYATT_COUPON");  
   
-txnVoid.setOutlet_id("RH11X");  
+txnVoid.setOutlet_id("OutletId");  
   
 transationVoidModel.setTxn_void(txnVoid);  
 transationVoidModel.setTxn_serials(txnSerialList);  
@@ -856,6 +858,7 @@ List<CouponSerialResults> results;
 
 
 **Call Function For Serial Detail By Customer and Coupon**
+![](https://mzcoupon.s3.ap-southeast-1.amazonaws.com/app/image_2022_06_02T06_15_21_306Z.png)
 ``` java
 
 Map<String, String> params = new HashMap<String, String>();  
@@ -875,7 +878,7 @@ List<CouponSerialResults> results;
 
 **Call Function For Serial Detail By Status**
 
-  ![](https://mzcoupon.s3.ap-southeast-1.amazonaws.com/logo/E46D138D-8450-4C61-BB8A-63E26D3D367E.jpg)
+  
 
 ``` java
 
@@ -900,7 +903,7 @@ Map<String, String> params = new HashMap<String, String>();
 params.put("limit", "20");  
 params.put("skip", "0");  
 params.put("search_by", "Aravind");  
-params.put("coupon_code","\'1004634\'");  
+params.put("coupon_code","\'CouponCode\'");  
 Call<OutletProfileModel> outletProfileModelCall= mzApiClient.getOutletService("Your Access Token").getOutletByCouponCode(params);
 
 ```
@@ -910,11 +913,12 @@ OutletProfileModel;
 
 
 **Call Function For Get Outlet By RedeemPass**
+![](https://mzcoupon.s3.ap-southeast-1.amazonaws.com/app/image_2022_06_02T06_15_48_403Z.png)
 ``` java
 
 
 Map<String, String> params = new HashMap<String, String>();  
-params.put("outlet_redeem_pass", "2222");  
+params.put("outlet_redeem_pass", "RedeemPin");  
   
 Call<OutletProfile> outletProfileModelCall= mzApiClient.getOutletService("Your Access Token").getOutletByRedeemPass(params);
 ```
@@ -923,15 +927,20 @@ Call<OutletProfile> outletProfileModelCall= mzApiClient.getOutletService("Your A
 OutletProfile;
 
 **Call Function For Get Active Transaction by Status**
+![](https://mzcoupon.s3.ap-southeast-1.amazonaws.com/logo/E46D138D-8450-4C61-BB8A-63E26D3D367E.jpg)
 ``` java
 
 Map<String, String> params = new HashMap<String, String>();  
-params.put("status", "I");
+params.put("status", "R");
 
 Call<TransactionModel> merchantModelCall= mzApiClient.getTransactionService("Your Access Token").getActiveTransactionByStatus("CustomerId",params);
   
 
 ```
+Status  "R" - Redeemed
+"T" - History
+"A" - Active
+
 
 **Return**
 OutletProfile;
