@@ -60,44 +60,44 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        login();
-//        SerialDealList();
-//        CouponDetail();
-//        SerialList();
-//        SerialListbyCouponId();
+        login();
+        SerialDealList();
+        CouponDetail();
+        SerialList();
+        SerialListbyCouponId();
         SerialDetailbyOutletId();
-//        SerialListHistorybyCustomerId();
-//        getCustomerDetail();
-//        getMerchantSetting();
-//        getMerchantDownloadSetting();
-//        getMerchantDetailByMerchantId();
-//        getOutletByCouponCode();
-//        getOutletByRedeemPass();
+        SerialListHistorybyCustomerId();
+        getCustomerDetail();
+        getMerchantSetting();
+        getMerchantDownloadSetting();
+        getMerchantDetailByMerchantId();
+        getOutletByCouponCode();
+        getOutletByRedeemPass();
 
 ////        //Transation API's
-//        postIssueCouponRollback();
-//        postIssueCommitCoupon();
-//        postIssueCoupon();
-//        postTransferCoupon();
-//        postVoidCoupon();
-//        postExpressRedeem();
-//        postRedeem();
-//        postRedeemCommit();
-//        postRedeemRollback();
-//        postRedeemVoidCoupon();
-//        IssueUpdateTransactionId();
+        postIssueCouponRollback();
+        postIssueCommitCoupon();
+        postIssueCoupon();
+        postTransferCoupon();
+        postVoidCoupon();
+        postExpressRedeem();
+        postRedeem();
+        postRedeemCommit();
+        postRedeemRollback();
+        postRedeemVoidCoupon();
+        IssueUpdateTransactionId();
 
 ////        Customer API's
 //
-//        postForgotCustomerPassword();
-//         UpdateCustomerPassWord();
-////        postCustomerLoginAuth();
-//        postCustomerRegister();
-//        CustomerProfileUpdate();
+        postForgotCustomerPassword();
+         UpdateCustomerPassWord();
+//        postCustomerLoginAuth();
+        postCustomerRegister();
+        CustomerProfileUpdate();
 //
 //        //Payment API's
-//        getPaymentlist();
-//        getActiveTractionByStatus();
+        getPaymentlist();
+        getActiveTractionByStatus();
 
 
     }
