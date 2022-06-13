@@ -11,6 +11,7 @@ import com.mezzofy.mzcustomercouponlib.Data.IssueCommitResponseData;
 import com.mezzofy.mzcustomercouponlib.Data.IssueCouponModel;
 import com.mezzofy.mzcustomercouponlib.Data.LoginRequest;
 import com.mezzofy.mzcustomercouponlib.Data.RedeemCommit;
+import com.mezzofy.mzcustomercouponlib.Data.ReferenceUpdateData;
 import com.mezzofy.mzcustomercouponlib.Data.Transactions;
 import com.mezzofy.mzcustomercouponlib.Data.TransationVoidModel;
 
@@ -218,6 +219,13 @@ public class mzApiClient {
     }
 
     public static TransactionService getTransactionService(String token, TransationVoidModel redeemobject){
+        Gson gson = new Gson();
+        String postString=gson.toJson(redeemobject).toString();
+        TransactionService transactionService=PostDataAuthBearer(token,"https://transaction.mzapi.mezzofy.com/",postString).create(TransactionService.class);
+        return transactionService;
+    }
+
+    public static TransactionService getTransactionUpdateService(String token, ReferenceUpdateData redeemobject){
         Gson gson = new Gson();
         String postString=gson.toJson(redeemobject).toString();
         TransactionService transactionService=PostDataAuthBearer(token,"https://transaction.mzapi.mezzofy.com/",postString).create(TransactionService.class);

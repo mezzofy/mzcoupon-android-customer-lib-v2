@@ -15,6 +15,7 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
@@ -43,7 +44,8 @@ public interface TransactionService {
     @GET("v2/transactions/{CustomerId}?")
     Call<TransactionModel> getActiveTransactionByStatus(@Path("CustomerId") String CustomerId,@QueryMap Map<String, String> PathParams);
 
-
+    @PUT("v2/updatetransaction/{TransactionId}")
+    Call putTransactionUpdate(@Path("TransactionId") String TransactionId,@QueryMap Map<String, String> PathParams);
 
 
 }

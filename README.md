@@ -874,12 +874,23 @@ Call<SerialResponse> serialResponseCall= mzApiClient.getSerialServices("Your Acc
 List<CouponSerialResults> results;
 
 
+**Call Function For Serial Detail By OutletId**
+![](https://mzcoupon.s3.ap-southeast-1.amazonaws.com/app/image_2022_06_02T06_15_27_594Z.png)
+``` java
 
+
+
+Map<String, String> params = new HashMap<String, String>();  
+params.put("outlet_id", "outletId");  
+  
+Call<Couponserialresults> serialResponseCall= mzApiClient.getSerialServices("Your Access Token").getSerialByOutletId("CouponId",params);
+
+```
+**Return**
+Coupon coupon;  
+Serial serial;
 
 **Call Function For Serial Detail By Status**
-
-  
-
 ``` java
 
 Map<String, String> params = new HashMap<String, String>();  

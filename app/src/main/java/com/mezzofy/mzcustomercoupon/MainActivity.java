@@ -9,6 +9,7 @@ import android.util.Log;
 import com.mezzofy.mzcustomercouponlib.Data.CouponData;
 import com.mezzofy.mzcustomercouponlib.Data.CouponModel;
 import com.mezzofy.mzcustomercouponlib.Data.CouponTransferModel;
+import com.mezzofy.mzcustomercouponlib.Data.Couponserialresults;
 import com.mezzofy.mzcustomercouponlib.Data.CustomerData;
 import com.mezzofy.mzcustomercouponlib.Data.CustomerModel;
 import com.mezzofy.mzcustomercouponlib.Data.CustomerRegisterData;
@@ -31,6 +32,7 @@ import com.mezzofy.mzcustomercouponlib.Data.PaymentModel;
 import com.mezzofy.mzcustomercouponlib.Data.RedeemCommit;
 import com.mezzofy.mzcustomercouponlib.Data.RedeemResponse;
 import com.mezzofy.mzcustomercouponlib.Data.RedeemResponseModel;
+import com.mezzofy.mzcustomercouponlib.Data.ReferenceUpdateData;
 import com.mezzofy.mzcustomercouponlib.Data.SerialResponse;
 import com.mezzofy.mzcustomercouponlib.Data.TransactionModel;
 import com.mezzofy.mzcustomercouponlib.Data.TransationVoidModel;
@@ -58,42 +60,44 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        login();
-        SerialDealList();
-        CouponDetail();
-        SerialList();
-        SerialListbyCouponId();
-        SerialListHistorybyCustomerId();
-        getCustomerDetail();
-        getMerchantSetting();
-        getMerchantDownloadSetting();
-        getMerchantDetailByMerchantId();
-        getOutletByCouponCode();
-        getOutletByRedeemPass();
+//        login();
+//        SerialDealList();
+//        CouponDetail();
+//        SerialList();
+//        SerialListbyCouponId();
+        SerialDetailbyOutletId();
+//        SerialListHistorybyCustomerId();
+//        getCustomerDetail();
+//        getMerchantSetting();
+//        getMerchantDownloadSetting();
+//        getMerchantDetailByMerchantId();
+//        getOutletByCouponCode();
+//        getOutletByRedeemPass();
 
-//        //Transation API's
-        postIssueCouponRollback();
-        postIssueCommitCoupon();
-        postIssueCoupon();
-        postTransferCoupon();
-        postVoidCoupon();
-        postExpressRedeem();
-        postRedeem();
-        postRedeemCommit();
-        postRedeemRollback();
-        postRedeemVoidCoupon();
+////        //Transation API's
+//        postIssueCouponRollback();
+//        postIssueCommitCoupon();
+//        postIssueCoupon();
+//        postTransferCoupon();
+//        postVoidCoupon();
+//        postExpressRedeem();
+//        postRedeem();
+//        postRedeemCommit();
+//        postRedeemRollback();
+//        postRedeemVoidCoupon();
+//        IssueUpdateTransactionId();
 
-//        Customer API's
-
-        postForgotCustomerPassword();
-         UpdateCustomerPassWord();
-//        postCustomerLoginAuth();
-        postCustomerRegister();
-        CustomerProfileUpdate();
-
-        //Payment API's
-        getPaymentlist();
-        getActiveTractionByStatus();
+////        Customer API's
+//
+//        postForgotCustomerPassword();
+//         UpdateCustomerPassWord();
+////        postCustomerLoginAuth();
+//        postCustomerRegister();
+//        CustomerProfileUpdate();
+//
+//        //Payment API's
+//        getPaymentlist();
+//        getActiveTractionByStatus();
 
 
     }
@@ -289,6 +293,36 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void IssueUpdateTransactionId(){
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("status", "R");
+
+        ReferenceUpdateData referenceUpdateData=new ReferenceUpdateData();
+        referenceUpdateData.setTransaction_ref_no("test api 01 Feb 2022");
+
+
+        Call<Void> loginResponseCall= mzApiClient.getTransactionUpdateService("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjJIRkVBUiIsInBhc3N3b3JkIjoiOHFxaCIsImlhdCI6MTY1NTEwMzE2NywiZXhwIjoxNjU1MTMxOTY3fQ._EJurgx7D7M9fsaEwlGBHaQxxFyN2C80oOWEly7iIeg",referenceUpdateData).putTransactionUpdate("914UZ946MB",params);
+
+        loginResponseCall.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.d("msg", "onResponse: "+response.toString());
+                if(response.isSuccessful())
+                    Log.d("msg", "onResponse: Success"+response.body().toString());
+                else
+                    Log.d("msg", "onResponse: Success"+response.raw().toString());
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("TAG", "onResponse: Fail"+t.toString());
+            }
+        });
+    }
+
+
+
+
 
     public void postIssueCoupon(){
 
@@ -419,6 +453,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+//    public void postExpressRedeemExpiredCoupon(){
+//
+//
+//        Call<RedeemResponseModel> loginResponseCall= mzApiClient.getRedeemExpressService("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik9MVE1GMyIsInBhc3N3b3JkIjoiOFFZVSIsImlhdCI6MTY1MzMwMzQ2NiwiZXhwIjoxNjUzMzMyMjY2fQ.BI0BeJoSw3IbOeLwYP35ixXiAEHU6bT9KxntGX4Rcqs",expressRedeemModel).PostExpressRedeem();
+//
+//        loginResponseCall.enqueue(new Callback<RedeemResponseModel>() {
+//            @Override
+//            public void onResponse(Call<RedeemResponseModel> call, Response<RedeemResponseModel> response) {
+//                Log.d("msg", "onResponse: "+response.toString());
+//                if(response.isSuccessful())
+//                    Log.d("msg", "onResponse: Success"+response.body().toString());
+//                else
+//                    Log.d("msg", "onResponse: Success"+response.raw().toString());
+//            }
+//            @Override
+//            public void onFailure(Call<RedeemResponseModel> call, Throwable t) {
+//                Log.d("TAG", "onResponse: Fail"+t.toString());
+//            }
+//        });
+//    }
 
 
     public void postRedeem(){
@@ -730,6 +785,27 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<SerialResponse> call, Throwable t) {
+                Log.e("TAG", "failed: ");
+            }
+        });
+
+
+    }
+
+
+    public void SerialDetailbyOutletId(){
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("outlet_id", "FGRU0");
+
+        Call<Couponserialresults> serialResponseCall= mzApiClient.getSerialServices("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik9MVE1GMyIsInBhc3N3b3JkIjoiOFFZVSIsImlhdCI6MTY1NTExMzIyMCwiZXhwIjoxNjU1MTQyMDIwfQ.bJXwV4ikNN-lU3yus2bzyMU9d_-Qr8xrGGE_y3LkFZ8").getSerialByOutletId("WJ7GFLKWOO",params);
+        serialResponseCall.enqueue(new Callback<Couponserialresults>() {
+            @Override
+            public void onResponse(Call<Couponserialresults> call, Response<Couponserialresults> response) {
+                Log.e("TAG", "onResponse: "+response.body().toString());
+            }
+            @Override
+            public void onFailure(Call<Couponserialresults> call, Throwable t) {
                 Log.e("TAG", "failed: ");
             }
         });

@@ -1,6 +1,7 @@
 package com.mezzofy.mzcustomercouponlib.RemoteUtils;
 
 
+import com.mezzofy.mzcustomercouponlib.Data.Couponserialresults;
 import com.mezzofy.mzcustomercouponlib.Data.SerialResponse;
 
 import java.util.Map;
@@ -24,4 +25,8 @@ public interface SerialServices {
     @GET("v2/customer/{CustomerId}/")
     Call<SerialResponse> getSerialHistoryListByCustomerId(@Path("CustomerId") String CustomerId, @QueryMap Map<String, String> PathParams);
 
-  }
+    @GET("v2/{CustomerId}/")
+    Call<Couponserialresults> getSerialByOutletId(@Path("CustomerId") String CustomerId, @QueryMap Map<String, String> PathParams);
+
+
+}
